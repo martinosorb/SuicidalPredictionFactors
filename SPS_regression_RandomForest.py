@@ -79,7 +79,7 @@ plt.xlabel(COL_TARGET + " true value")
 plt.ylabel(COL_TARGET + " predicted value")
 plt.plot([0, 25], [0, 25], 'k--', alpha=.5)
 
-plt.savefig("RF_SPS_metrics.pdf", bbox_inches="tight")
+plt.savefig("figures/RF_SPS_metrics.pdf", bbox_inches="tight")
 
 
 # #### PLOT IMPORTANCES #### #
@@ -89,4 +89,4 @@ plt.xlabel("Random forest's feature importance")
 
 plot_importances(importances, column_names=train_features.columns, color='C9')
 
-plt.savefig("RF_SPS_features.pdf", bbox_inches="tight")
+plt.savefig("figures/RF_SPS_features.pdf", bbox_inches="tight")

@@ -89,7 +89,7 @@ plt.ylim([0.5, 1])
 plt.xticks(range(1, 6), ["Accuracy", "Precision", "Recall", "Specificity", "AUC"])
 plt.ylabel("Score")
 
-plt.savefig("RF_SIever_metrics.pdf")
+plt.savefig("figures/RF_SIever_metrics.pdf")
 
 
 # #### PLOT IMPORTANCES #### #
@@ -99,4 +99,4 @@ plt.xlabel("Feature importance in random forest")
 
 plot_importances(importances, train_features.columns, color='C4')
 
-plt.savefig("RF_SIever_features.pdf", bbox_inches="tight")
+plt.savefig("figures/RF_SIever_features.pdf", bbox_inches="tight")
