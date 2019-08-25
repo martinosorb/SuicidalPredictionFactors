@@ -3,10 +3,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
+from utils import plot_importances
 
 # #### PARAMETERS - CAN BE SET #### #
 FILE = "dataset_cleaned.csv"
-N_FOLDS = 20  # number of train/test splits
+N_FOLDS = 1  # number of train/test splits
 TEST_SIZE = 0.2  # What fraction of the dataset is saved for testing
 COL_TARGET = "SPS"  # Which column we're trying to predict
 
@@ -56,3 +57,33 @@ for iteration in range(N_FOLDS):
 
     # Importance of variables
     importances[iteration] = model.feature_importances_
+
+
+print("Median scores on training set:", np.median(scores_train))
+print("Median scores on test set:", np.median(scores_test))
+
+
+# #### PLOT FIT QUALITY #### #
+plt.title("Regression of SPS by Random Forest")
+
+plt.gca().set_aspect('equal')
+plt.plot(train_labels, train_predictions, '+', alpha=.8,
+         color='C8', label="Training set")
+plt.plot(test_labels, test_predictions, 'x', alpha=.8,
+         color='C9', label="Test set")
+plt.legend()
+plt.xlabel(COL_TARGET + " true value")
+plt.ylabel(COL_TARGET + " predicted value")
+plt.plot([0, 25], [0, 25], 'k--', alpha=.5)
+
+plt.savefig("RF_SPS_metrics.pdf", bbox_inches="tight")
+
+
+# #### PLOT IMPORTANCES #### #
+plt.figure(figsize=(4, 5.5))
+plt.title("Regression of 'SPS': features")
+plt.xlabel("Random forest's feature importance")
+
+plot_importances(importances, column_names=train_features.columns, color='C9')
+
+plt.savefig("RF_SPS_features.pdf", bbox_inches="tight")
