@@ -9,7 +9,7 @@ TARGET_FILE = "dataset_cleaned.csv"
 COLS_USE = ["Age", "Mat_Indiff", "Mat_Abus", "Mat_Over", "ACES",
             "Avoi", "Anx", "PHQ", "Defeat", "Entrp",
             "Burd", "Thw_Belon", "Strategy", "Non_Accept", "Impulse",
-            "Goals", "Aware", "Clarity", "SPS"]
+            "Goals", "Aware", "Clarity", "SPS", "SI_ever"]
 # Set columns for which we need to use dummies (turn into binary)
 # note that it's not enough to just add them here, you also need to manually
 # turn them into dummies below.

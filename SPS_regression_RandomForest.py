@@ -7,13 +7,15 @@ from utils import plot_importances
 
 # #### PARAMETERS - CAN BE SET #### #
 FILE = "dataset_cleaned.csv"
-N_FOLDS = 1  # number of train/test splits
+N_FOLDS = 20  # number of train/test splits
 TEST_SIZE = 0.2  # What fraction of the dataset is saved for testing
 COL_TARGET = "SPS"  # Which column we're trying to predict
+COL_DROP = ["SI_ever"]  # we want to remove this
 
 
 # Data loading
 data = pd.read_csv(FILE)
+data.drop(COL_DROP, 1, inplace=True)
 
 # Definition of the model which will be used below: this is the most important bit
 # see the scikit-learn documentation for the meaning of these hyperparameters
@@ -23,7 +25,7 @@ model = RandomForestRegressor(
     criterion='mse',
     max_features='sqrt',
     max_depth=10,
-    min_samples_split=15
+    min_samples_split=15  # regularizes a bit
 )
 
 
@@ -59,6 +61,7 @@ for iteration in range(N_FOLDS):
     importances[iteration] = model.feature_importances_
 
 
+print(model)
 print("Median scores on training set:", np.median(scores_train))
 print("Median scores on test set:", np.median(scores_test))
 
