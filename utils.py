@@ -9,7 +9,7 @@ def plot_importances(importances, column_names, color='C0'):
     errbar_u = f_imp_q75 - f_imp_median
 
     sort_idx = np.argsort(f_imp_median)
-    xerr = (errbar_u[sort_idx], -errbar_l[sort_idx])
+    xerr = (errbar_l[sort_idx], -errbar_u[sort_idx])
 
     x = np.arange(len(f_imp_median))
     plt.barh(x, width=f_imp_median[sort_idx], xerr=xerr, color=color)
