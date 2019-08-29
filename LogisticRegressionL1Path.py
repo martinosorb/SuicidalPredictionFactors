@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 FILE = "dataset_cleaned.csv"
 COL_TARGET = "Lifetime suicidal ideation"  # Which column we're trying to predict
 COL_DROP = ["Current suicidal ideation"]  # we want to remove this
-C_values = np.logspace(-2.5, 1, 20)
+C_values = np.logspace(-2.5, 1, 50)
 
 # Data loading
 data = pd.read_csv(FILE)
@@ -24,7 +24,7 @@ model = LogisticRegression(
     solver='saga',
     tol=1e-6,
     max_iter=int(1e6),
-    warm_start=True,
+    warm_start=False,
     penalty='l1'
 )
 
