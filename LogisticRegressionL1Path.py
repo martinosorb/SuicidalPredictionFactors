@@ -7,9 +7,9 @@ import matplotlib.pyplot as plt
 
 # #### PARAMETERS - CAN BE SET #### #
 FILE = "dataset_cleaned.csv"
-COL_TARGET = "SI_ever"  # Which column we're trying to predict
-COL_DROP = ["SPS"]  # we want to remove this
-C_values = np.logspace(-2.5, 1, 50)
+COL_TARGET = "Lifetime suicidal ideation"  # Which column we're trying to predict
+COL_DROP = ["Current suicidal ideation"]  # we want to remove this
+C_values = np.logspace(-2.5, 1, 20)
 
 # Data loading
 data = pd.read_csv(FILE)
@@ -50,14 +50,14 @@ for iteration, C in enumerate(C_values):
     importances[iteration] = model.coef_
 
 
-plt.figure()
+plt.figure(figsize=(6, 4))
 plt.title('Feature weight as a function of regularization')
-plt.plot(C_values, importances)
+plt.plot(C_values, importances, linewidth=0.7)
 for i, varname in enumerate(train_features_prescaling.columns):
     plt.annotate(varname,
                  (C_values[-1] + 1, importances[-1, i] - 0.01),
-                 color=f'C{i}')
-plt.xlim([C_values[0] * 0.9, C_values[-1] * 10.0])
+                 color=f'C{i}', fontsize=7)
+plt.xlim([C_values[0] * 0.9, C_values[-1] * 30.0])
 plt.xscale('log')
 plt.ylabel('Feature weight in logistic regression')
 plt.xlabel('L1 regularization factor (stronger to weaker)')

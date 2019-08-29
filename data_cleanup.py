@@ -44,4 +44,32 @@ reduced_df = reduced_df.assign(
 # remove the columns that we no longer need because we added the dummies
 reduced_df.drop(COLS_USE_DUMMIES, 1, inplace=True)
 
+
+# we will translate shortened variable names to long versions
+TRANSL_D = {"Age": "Age",
+            "Mat_Indiff": "Maternal indifference",
+            "Mat_Abus": "Maternal abuse",
+            "Mat_Over": "Maternal overcontrol",
+            "ACES": "Adverse childhood",
+            "Avoi": "Attachment avoidance",
+            "Anx": "Attachment anxiety",
+            "PHQ": "Depressive symptoms",
+            "Defeat": "Defeat",
+            "Entrp": "Entrapment",
+            "Burd": "Burdensomeness",
+            "Thw_Belon": "Thwarted belongingness",
+            "Strategy": "Strategy",
+            "Non_Accept": "Non-acceptance",
+            "Impulse": "Impulsivity",
+            "Goals": "Establishing goals",
+            "Aware": "Establishing awareness",
+            "Clarity": "Establishing clarity",
+            "SPS": "Current suicidal ideation",
+            "SI_ever": "Lifetime suicidal ideation",
+            "Heterosexual": "Heterosexual",
+            "Psych_D_Yes": "Psychiatric diagnosis",
+            "Psych_M_Yes": "Antidepr or anxiolytic"}
+
+reduced_df.columns = [TRANSL_D[col] for col in reduced_df.columns]
+
 reduced_df.to_csv(TARGET_FILE)

@@ -9,8 +9,8 @@ from utils import plot_importances
 FILE = "dataset_cleaned.csv"
 N_FOLDS = 20  # number of train/test splits
 TEST_SIZE = 0.2  # What fraction of the dataset is saved for testing
-COL_TARGET = "SPS"  # Which column we're trying to predict
-COL_DROP = ["SI_ever"]  # we want to remove this
+COL_TARGET = "Current suicidal ideation"  # Which column we're trying to predict
+COL_DROP = ["Lifetime suicidal ideation"]  # we want to remove this
 
 
 # Data loading
@@ -67,7 +67,7 @@ print("Median scores on test set:", np.median(scores_test))
 
 
 # #### PLOT FIT QUALITY #### #
-plt.title("Regression of SPS by Random Forest")
+plt.title("Prediction metrics, random forest regression")
 
 plt.gca().set_aspect('equal')
 plt.plot(train_labels, train_predictions, '+', alpha=.8,
@@ -84,7 +84,7 @@ plt.savefig("figures/RF_SPS_metrics.pdf", bbox_inches="tight")
 
 # #### PLOT IMPORTANCES #### #
 plt.figure(figsize=(4, 5.5))
-plt.title("Regression of 'SPS': features")
+plt.title("Current suicidal ideation index: features")
 plt.xlabel("Random forest's feature importance")
 
 plot_importances(importances, column_names=train_features.columns, color='C9')

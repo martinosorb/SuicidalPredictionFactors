@@ -10,8 +10,8 @@ import matplotlib.pyplot as plt
 FILE = "dataset_cleaned.csv"
 N_FOLDS = 20  # number of train/test splits
 TEST_SIZE = 0.2  # What fraction of the dataset is saved for testing
-COL_TARGET = "SI_ever"  # Which column we're trying to predict
-COL_DROP = ["SPS"]  # we want to remove this
+COL_TARGET = "Lifetime suicidal ideation"  # Which column we're trying to predict
+COL_DROP = ["Current suicidal ideation"]  # we want to remove this
 
 
 # Data loading
@@ -81,7 +81,7 @@ print("Median specificity:", np.median(specificities))
 print("Median AUC:", np.median(aucs))
 
 # #### PLOT FIT QUALITY #### #
-plt.title("Prediction metrics, RF classification")
+plt.title("Prediction metrics, random forest classification")
 plt.grid(axis='y')
 bp = plt.boxplot([accuracies, precisions, recalls, specificities, aucs], widths=0.5)
 plt.setp(bp['medians'], color='C4', linewidth=2)
@@ -94,7 +94,7 @@ plt.savefig("figures/RF_SIever_metrics.pdf")
 
 # #### PLOT IMPORTANCES #### #
 plt.figure(figsize=(4, 5.5))
-plt.title("Classification of 'SI_ever': features")
+plt.title("Lifetime suicidal ideation: features")
 plt.xlabel("Feature importance in random forest")
 
 plot_importances(importances, train_features.columns, color='C4')
