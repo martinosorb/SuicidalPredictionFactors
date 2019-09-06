@@ -49,27 +49,27 @@ reduced_df.drop(COLS_USE_DUMMIES, 1, inplace=True)
 TRANSL_D = {"Age": "Age",
             "Mat_Indiff": "Maternal indifference",
             "Mat_Abus": "Maternal abuse",
-            "Mat_Over": "Maternal overcontrol",
+            "Mat_Over": "Maternal overprotection",
             "ACES": "Adverse childhood",
             "Avoi": "Attachment avoidance",
             "Anx": "Attachment anxiety",
             "PHQ": "Depressive symptoms",
             "Defeat": "Defeat",
             "Entrp": "Entrapment",
-            "Burd": "Burdensomeness",
+            "Burd": "Perceived burdensomeness",
             "Thw_Belon": "Thwarted belongingness",
-            "Strategy": "Strategy",
-            "Non_Accept": "Non-acceptance",
-            "Impulse": "Impulsivity",
-            "Goals": "Establishing goals",
-            "Aware": "Establishing awareness",
-            "Clarity": "Establishing clarity",
+            "Strategy": "Strategy (DER)",
+            "Non_Accept": "Non-acceptance (DER)",
+            "Impulse": "Impulse (DER)",
+            "Goals": "Goals (DER)",
+            "Aware": "Awareness (DER)",
+            "Clarity": "Clarity (DER)",
             "SPS": "Current suicidal ideation",
             "SI_ever": "Lifetime suicidal ideation",
-            "Heterosexual": "Heterosexual",
+            "Heterosexual": "Being heterosexual",
             "Psych_D_Yes": "Psychiatric diagnosis",
-            "Psych_M_Yes": "Antidepr or anxiolytic"}
+            "Psych_M_Yes": "Psychiatric medication"}
 
 reduced_df.columns = [TRANSL_D[col] for col in reduced_df.columns]
 
-reduced_df.to_csv(TARGET_FILE)
+reduced_df.to_csv(TARGET_FILE, index_label="Part_ID")

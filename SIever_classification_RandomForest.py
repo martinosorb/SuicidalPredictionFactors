@@ -15,8 +15,10 @@ COL_DROP = ["Current suicidal ideation"]  # we want to remove this
 
 
 # Data loading
-data = pd.read_csv(FILE)
+data = pd.read_csv(FILE, index_col="Part_ID")
 data.drop(COL_DROP, 1, inplace=True)
+
+print(data)
 
 # Definition of the model which will be used below: this is the most important bit
 # see the scikit-learn documentation for the meaning of these hyperparameters

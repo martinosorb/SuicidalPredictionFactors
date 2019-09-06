@@ -12,7 +12,7 @@ COL_DROP = ["Current suicidal ideation"]  # we want to remove this
 C_values = np.logspace(-2.5, 1, 50)
 
 # Data loading
-data = pd.read_csv(FILE)
+data = pd.read_csv(FILE, index_col="Part_ID")
 data.drop(COL_DROP, 1, inplace=True)
 
 

@@ -14,7 +14,7 @@ COL_DROP = ["Lifetime suicidal ideation"]  # we want to remove this
 
 
 # Data loading
-data = pd.read_csv(FILE)
+data = pd.read_csv(FILE, index_col="Part_ID")
 data.drop(COL_DROP, 1, inplace=True)
 
 # Definition of the model which will be used below: this is the most important bit
