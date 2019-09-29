@@ -1,5 +1,5 @@
 import pandas as pd
-from numpy import nan
+from numpy import nan, nanmean
 
 # File we are loading
 FILE = "Tiago-Martino_Collab.csv"
@@ -14,6 +14,9 @@ COLS_USE = ["Age", "Mat_Indiff", "Mat_Abus", "Mat_Over", "ACES",
 # note that it's not enough to just add them here, you also need to manually
 # turn them into dummies below.
 COLS_USE_DUMMIES = ["SexualO", "Psych_D", "Psych_M"]
+# Set DER columns that will be merged in a single one...
+COLS_DER_MERGE = ["Strategy", "Non_Accept", "Impulse", "Goals", "Aware", "Clarity"]
+
 
 # load the data
 data = pd.read_csv(FILE)
@@ -29,8 +32,13 @@ data.replace("Unknown", nan, inplace=True)
 data.replace("Undisclosed", nan, inplace=True)
 # keep only the columns we are interested in using
 reduced_df = data[COLS_USE_DUMMIES + COLS_USE]
-print("Size prior to dropping missing data:", len(reduced_df))
+# ... and merge the DER together. The fact we merge them here means some NaNs are
+# tolerated, if some of the DER columns are empty but not all
+# this does not actually happen in practice
+reduced_df = reduced_df.assign(DER=reduced_df[COLS_DER_MERGE].sum(axis=1, skipna=True))
+reduced_df.drop(COLS_DER_MERGE, 1, inplace=True)
 # dropping rows with NaN
+print("Size prior to dropping missing data:", len(reduced_df))
 non_null = ~reduced_df.isnull().any(axis=1)
 reduced_df = reduced_df[non_null]
 print("Size after dropping missing data:", len(reduced_df))
@@ -64,6 +72,7 @@ TRANSL_D = {"Age": "Age",
             "Goals": "Goals (DER)",
             "Aware": "Awareness (DER)",
             "Clarity": "Clarity (DER)",
+            "DER": "DER",
             "SPS": "Current suicidal ideation",
             "SI_ever": "Lifetime suicidal ideation",
             "Heterosexual": "Being heterosexual",
